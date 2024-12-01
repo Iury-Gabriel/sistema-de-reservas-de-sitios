@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Reserva de Sitios",
+  title: "Meu Perfil",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body
-        className={`antialiased bg-slate-50`}
+        className={`antialiased bg-[#121212]`}
       >
         <main className="">
           {children}
