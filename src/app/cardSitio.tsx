@@ -1,19 +1,25 @@
+"use client"
+
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
-    img: any;
+    id: string;
+    img: string;
     title: string;
     avaliation: number;
     price: number;
     description: string;
 };
 
-export function CardSitio({ img, title, avaliation, price, description }: Props) {
+export function CardSitio({ id, img, title, avaliation, price, description }: Props) {
     return (
         <div className="bg-black rounded-xl w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto">
             <div className="h-[160px] w-full bg-white rounded-t-xl overflow-hidden">
                 <Image
                     src={img}
+                    width={640}
+                    height={480}
                     alt="Foto do sítio"
                     className="object-cover w-full h-full"
                 />
@@ -27,7 +33,7 @@ export function CardSitio({ img, title, avaliation, price, description }: Props)
                 <p className="text-white my-6">{description}</p>
 
                 <button className="bg-stone-900 py-2 px-4 rounded-lg font-bold text-white">
-                    Saiba mais
+                    <Link href={`/sitio/${id}`}>Saiba mais</Link>
                 </button>
             </div>
         </div>
