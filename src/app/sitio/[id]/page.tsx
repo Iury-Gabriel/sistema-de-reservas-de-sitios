@@ -1,11 +1,15 @@
 import { getSitio } from "@/actions/getSitio";
 import { Footer } from "../../footer";
+import { getSitios } from "@/actions/getSitios";
 
 type Props = {
     params: { id: string };
 };
 
-export default function Page({ site }: { site: any }) {
+export default async function Page({ params }: Props) {
+    const id = params.id;
+    const site = await getSitio(id);
+
     return (
         <div className="">
             <main className="max-w-7xl mx-auto my-10 px-4">
@@ -19,11 +23,9 @@ export default function Page({ site }: { site: any }) {
     );
 }
 
-export async function getServerSideProps(context: { params: { id: string } }) {
-    const id = context.params.id;
-    const site = await getSitio(id);
-
-    return {
-        props: { site },
-    };
+export async function generateStaticParams() {
+    const sitios = await getSitios();
+    return sitios.map((site: any) => ({
+        id: site.id.toString(),
+    }));
 }
