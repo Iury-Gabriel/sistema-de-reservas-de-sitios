@@ -1,13 +1,8 @@
 import { getSitio } from "@/actions/getSitio";
 import { Footer } from "../../footer";
+import { NextPage } from "next";
 
-interface SitioPageProps {
-    params: {
-        id: string;
-    };
-}
-
-export default async function Page({ params }: SitioPageProps) {
+const Page: NextPage<{ params: { id: string } }> = async ({ params }) => {
     const { id } = params;
 
     const site = await getSitio(id);
@@ -23,4 +18,6 @@ export default async function Page({ params }: SitioPageProps) {
             </div>
         </div>
     );
-}
+};
+
+export default Page;
