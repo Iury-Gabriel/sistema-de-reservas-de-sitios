@@ -15,6 +15,8 @@ export default async function Page() {
         );
     });
 
+    console.log(sitios);
+
     return (
         <div className="">
 
