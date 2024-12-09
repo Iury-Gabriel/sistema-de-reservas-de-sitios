@@ -3,8 +3,9 @@ import { CardSitio } from "./cardSitio";
 import { Footer } from "./footer";
 import { getSitios } from "@/actions/getSitios";
 
-export default async function Page() {
+export const revalidate = 0; // Sempre buscar dados atualizados
 
+export default async function Page() {
     const baseURL = "https://site-service-jbcm.onrender.com/";
 
     const sitios = await getSitios();
@@ -19,7 +20,6 @@ export default async function Page() {
 
     return (
         <div className="">
-
             <main className="max-w-7xl mx-auto my-10 px-4">
                 <h1 className="text-black text-3xl font-bold">
                     Principais sítios da cidade
