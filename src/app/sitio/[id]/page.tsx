@@ -1,12 +1,7 @@
 import { getSitio } from "@/actions/getSitio";
 import { Footer } from "../../footer";
-import { getSitios } from "@/actions/getSitios";
 
-type Props = {
-    params: { id: string };
-};
-
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
     const site = await getSitio(id);
 
@@ -21,11 +16,4 @@ export default async function Page({ params }: Props) {
             </div>
         </div>
     );
-}
-
-export async function generateStaticParams() {
-    const sitios = await getSitios();
-    return sitios.map((site: any) => ({
-        id: site.id.toString(),
-    }));
 }
