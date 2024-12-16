@@ -16,8 +16,6 @@ export default async function Page() {
         );
     });
 
-    console.log(sitios);
-
     return (
         <div className="">
             <main className="max-w-7xl mx-auto mt-10 px-4 mb-24">
