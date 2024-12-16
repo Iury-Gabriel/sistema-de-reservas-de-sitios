@@ -20,7 +20,7 @@ export default async function Page() {
 
     return (
         <div className="">
-            <main className="max-w-7xl mx-auto my-10 px-4">
+            <main className="max-w-7xl mx-auto mt-10 px-4 mb-24">
                 <h1 className="text-black text-3xl font-bold">
                     Principais sítios da cidade
                 </h1>

@@ -49,7 +49,7 @@ export default function Page() {
 
     return (
         <div className="bg-black">
-            <main className="max-w-7xl mx-auto pb-10">
+            <main className="max-w-7xl mx-auto pb-10 p-5">
                 <h1 className="text-white text-4xl font-bold pt-3 pb-3">Meu Perfil</h1>
 
                 <CardInfoPersonal name={user.name} email={user.email} phone="Telefone" />

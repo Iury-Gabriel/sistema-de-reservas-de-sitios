@@ -18,7 +18,7 @@ export function Header() {
                     Reserva<span className="text-orange-500 font-bold">Sitio</span>
                 </h1>
 
-                <nav className="flex gap-4 text-black">
+                <nav className="flex gap-4 text-black pr-2">
                     <Link href="/">Inicio</Link>
                     <Link href="/anunciar">Anunciar Sitio</Link>
                     {isAuthenticated ? (
