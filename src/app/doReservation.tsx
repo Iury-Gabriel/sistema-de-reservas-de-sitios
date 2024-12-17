@@ -35,54 +35,56 @@ export function DoReservation() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Reservar</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Fazer reserva</DialogTitle>
-          <DialogDescription>
-            Preencha os campos abaixo para fazer uma reserva
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <form action="" method="post">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-[280px] justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? (
-                    format(date, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
-                  ) : (
-                    <span>Clique para escolher uma data</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  locale={ptBR}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </form>
-        </div>
-        <DialogFooter>
-          <Button type="button" onClick={handleReservation}>
-            Fazer reserva
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <div>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>Reservar</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px] max-w-[90%]">
+          <DialogHeader>
+            <DialogTitle>Fazer reserva</DialogTitle>
+            <DialogDescription>
+              Preencha os campos abaixo para fazer uma reserva
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <form action="" method="post">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-[280px] justify-start text-left font-normal",
+                      !date && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {date ? (
+                      format(date, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })
+                    ) : (
+                      <span>Clique para escolher uma data</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    locale={ptBR}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </form>
+          </div>
+          <DialogFooter>
+            <Button type="button" onClick={handleReservation}>
+              Fazer reserva
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }

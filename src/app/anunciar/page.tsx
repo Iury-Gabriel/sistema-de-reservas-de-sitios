@@ -10,8 +10,8 @@ export const revalidate = 0; // Sempre buscar dados atualizados
 export default async function Page() {
 
     return (
-        <div className="bg-[#121212]">
-                    <main className="max-w-7xl mx-auto mb-10 pb-10 p-5 flex flex-col items-center justify-center">
+        <div className="bg-[#121212] h-full">
+                    <main className="max-w-7xl mx-auto mb-10 pb-96 p-5 flex flex-col items-center justify-center">
                         <h1 className="text-white text-4xl font-bold py-7 text-center">Planos para Anunciar seu Sítio</h1>
 
                         <p className="text-white text-center text-lg mb-5">Escolha o plano ideal para você e comece a receber reservas para o seu sítio. <br></br> Aumente sua visibilidade e alcance mais clientes!</p>
