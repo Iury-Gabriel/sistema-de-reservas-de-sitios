@@ -67,9 +67,9 @@ export default function Page() {
                 const password = (form.elements.namedItem("password") as HTMLInputElement).value;
                 const role = (form.elements.namedItem("role") as HTMLSelectElement).value;
 
-                let roleId = 'cm4g21znt0000137u3oz3izvg';
+                let roleId = 'cm4u5dj850001tq03d20353nq';
                 if(role === 'proprietario') {
-                    roleId = 'cm4g4hbmd0000obrn5ahvom98';
+                    roleId = 'cm4u5dd8s0000tq03ibqnvo69';
                 }
 
                 const res = await registerAction({ email, password, name, roleId });
