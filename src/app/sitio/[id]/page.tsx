@@ -41,7 +41,7 @@ export default async function Page({ params }: any) {
             <p className="text-stone-500">Avaliação: {site.rating}/5</p>
           </div>
 
-          <DoReservation />
+          <DoReservation siteId={site.id} pricePerDay={site.pricePerDay} />
         </div>
 
         <h3 className="text-black text-2xl font-bold my-5">Descrição</h3>

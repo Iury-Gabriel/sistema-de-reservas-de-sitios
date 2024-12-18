@@ -22,7 +22,8 @@ export const loginAction = async ({ email, password }: userLogin) => {
     if (user) {
         const userString = JSON.stringify({
             email: user.email,
-            name: user.name
+            name: user.name,
+            userId: user.id
         });
         Cookies.set("user", userString, { expires: 1 / 24 });
     }

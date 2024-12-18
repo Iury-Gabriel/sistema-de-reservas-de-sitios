@@ -4,7 +4,7 @@ import * as React from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
-
+import Cookies from "js-cookie";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -22,13 +22,47 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { createReservation } from "@/actions/createReservation";
+import { redirect } from "next/navigation";
 
-export function DoReservation() {
+type Props = {
+  siteId: string;
+  pricePerDay: string
+};  
+
+export function DoReservation({ siteId, pricePerDay }: Props) {
   const [date, setDate] = React.useState<Date>();
 
-  const handleReservation = () => {
+  const handleReservation = async () => {
     if (date) {
       console.log("Data selecionada:", format(date, "yyyy-MM-dd"));
+      const token = Cookies.get("authToken");
+      const userCookie = Cookies.get("user");
+
+      if (!token && !userCookie) {
+        redirect("/login");
+      }
+
+      if (userCookie) {
+        try {
+          const parsedUser = JSON.parse(userCookie);
+
+          const res = await createReservation({
+            userId: parsedUser.userId,
+            siteId,
+            dataReservation: date,
+            dataCheckout: date,
+            total: pricePerDay,
+          })
+
+          if(res.status === 201) {
+            console.log("Reserva criada com sucesso!");
+            window.location.href = "/perfil";
+          }
+        } catch (error) {
+          console.error("Failed to parse user cookie:", error);
+        }
+      }
     } else {
       console.log("Nenhuma data foi selecionada.");
     }
