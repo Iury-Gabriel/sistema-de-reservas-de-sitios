@@ -118,7 +118,6 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
                     selected={date}
                     onSelect={setDate}
                     locale={ptBR}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>
