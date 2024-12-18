@@ -24,11 +24,18 @@ import {
 } from "@/components/ui/dialog";
 import { createReservation } from "@/actions/createReservation";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 type Props = {
   siteId: string;
   pricePerDay: string
 };  
+
+export type Response = {
+  success: boolean; 
+  message: string;
+  status: number
+}
 
 export function DoReservation({ siteId, pricePerDay }: Props) {
   const [date, setDate] = React.useState<Date>();
@@ -47,7 +54,7 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
         try {
           const parsedUser = JSON.parse(userCookie);
 
-          const res = await createReservation({
+          const res: Response = await createReservation({
             userId: parsedUser.userId,
             siteId,
             dataReservation: date,
@@ -55,8 +62,13 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
             total: pricePerDay,
           })
 
+          if(res.message === "Já existe uma reserva para este período.") {
+            toast("Já existe uma reserva para este período. Escolha outra data", { type: 'error' });
+          }
+
           if(res.status === 201) {
             console.log("Reserva criada com sucesso!");
+            Cookies.set("reservation", 'success', { expires: 5 / 86400, secure: true });
             window.location.href = "/perfil";
           }
         } catch (error) {

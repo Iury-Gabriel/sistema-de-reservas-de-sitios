@@ -6,6 +6,7 @@ import { CardMyReservation } from "../cardMyReservation";
 import { Footer } from "../footer";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 
 type User = {
     name: string;
@@ -19,6 +20,11 @@ export default function Page() {
     useEffect(() => {
         const token = Cookies.get("authToken");
         const userCookie = Cookies.get("user");
+        const reservation = Cookies.get("reservation");
+
+        if(reservation) {
+            toast("Reserva criada com sucesso!", { type: 'success' });
+        }
 
         if (!token && !userCookie) {
             redirect("/login");
