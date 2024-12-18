@@ -1,12 +1,7 @@
 import axios from "axios"
 
 export const getReservationsByUser = async (id: string) => {
-    const reservations = await fetch(`https://reservation-service-ukoi.onrender.com/reservations/user/${id}`, {
-        cache: 'force-cache',
-        next: {         
-            revalidate: 600,
-        },
-    });
+    const reservations = await axios.get(`https://reservation-service-ukoi.onrender.com/reservations/user/${id}`);
 
-    return reservations.json();
+    return reservations.data;
 }
