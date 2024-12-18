@@ -1,15 +1,26 @@
 import axios from "axios"
 
 export const getSitios = async () => {
-    const sitios = await axios.get('https://site-service-jbcm.onrender.com/sites', {
-        headers: {
-            "Cache-Control": "no-cache",
+    const sitios = await fetch('https://site-service-jbcm.onrender.com/sites', {
+        cache: 'force-cache',
+        next: {         
+            revalidate: 600,
         },
-    })
+    });
 
-    const ping = await axios.get('https://reservation-service-ukoi.onrender.com/ping');
+    const ping = await fetch('https://reservation-service-ukoi.onrender.com/ping', {
+        cache: 'force-cache',
+        next: {         
+            revalidate: 600,
+        },
+    });
 
-    const ping2 = await axios.get('https://user-services-q0r8.onrender.com/ping');
+    const ping2 = await fetch('https://user-services-q0r8.onrender.com/ping', {
+        cache: 'force-cache',
+        next: {         
+            revalidate: 600,
+        },
+    });
 
-    return sitios.data
+    return sitios.json();
 }

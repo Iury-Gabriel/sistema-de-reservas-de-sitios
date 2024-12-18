@@ -8,33 +8,34 @@ import { getSitios } from "@/actions/getSitios";
 
 export default function Page() {
     const [sitios, setSitios] = useState<any[]>([]);
-    const [isLoading, setIsLoading] = useState(true); // Estado de carregamento
+    const [isLoading, setIsLoading] = useState(true);
 
     const baseURL = "https://site-service-jbcm.onrender.com/";
 
     useEffect(() => {
-        // Função para buscar os dados
         const fetchSitios = async () => {
             try {
+                // Aqui você pode verificar se os dados estão no cache
                 const sitiosData = await getSitios();
 
-                // Formatar imagens
+                // Processar as imagens
                 sitiosData.forEach((sitio: any) => {
                     sitio.images = sitio.images.map((imagePath: string) =>
                         baseURL + imagePath.replace(/\\/g, "/") // Substituir '\' por '/'
                     );
                 });
 
-                setSitios(sitiosData); // Atualizar o estado com os dados
-                setIsLoading(false); // Finalizou o carregamento
+                setSitios(sitiosData);
             } catch (error) {
                 console.error("Erro ao buscar os sítios", error);
-                setIsLoading(false); // Mesmo em caso de erro, parar o loading
+            } finally {
+                // Garantir que o carregamento seja concluído
+                setIsLoading(false);
             }
         };
 
         fetchSitios();
-    }, []); // Vai rodar apenas uma vez ao carregar a página
+    }, []);
 
     if (isLoading) {
         return (

@@ -141,9 +141,7 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
               className="relative flex items-center justify-center px-4 py-2 text-white rounded-md focus:outline-none"
             >
               {isLoading ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-t-white border-black rounded-full animate-spin absolute left-2"></div>
-                </>
+                <div className="absolute w-4 h-4 border-2 border-t-white border-black rounded-full animate-spin"></div>
               ) : (
                 "Reservar"
               )}
