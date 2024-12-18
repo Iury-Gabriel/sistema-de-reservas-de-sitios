@@ -1,20 +1,48 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Header } from "./header";
 import { CardSitio } from "./cardSitio";
 import { Footer } from "./footer";
 import { getSitios } from "@/actions/getSitios";
 
-export const revalidate = 0; // Sempre buscar dados atualizados
+export default function Page() {
+    const [sitios, setSitios] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true); // Estado de carregamento
 
-export default async function Page() {
     const baseURL = "https://site-service-jbcm.onrender.com/";
 
-    const sitios = await getSitios();
+    useEffect(() => {
+        // Função para buscar os dados
+        const fetchSitios = async () => {
+            try {
+                const sitiosData = await getSitios();
 
-    sitios.forEach((sitio: any) => {
-        sitio.images = sitio.images.map((imagePath: string) =>
-            baseURL + imagePath.replace(/\\/g, "/") // Substituir '\' por '/'
+                // Formatar imagens
+                sitiosData.forEach((sitio: any) => {
+                    sitio.images = sitio.images.map((imagePath: string) =>
+                        baseURL + imagePath.replace(/\\/g, "/") // Substituir '\' por '/'
+                    );
+                });
+
+                setSitios(sitiosData); // Atualizar o estado com os dados
+                setIsLoading(false); // Finalizou o carregamento
+            } catch (error) {
+                console.error("Erro ao buscar os sítios", error);
+                setIsLoading(false); // Mesmo em caso de erro, parar o loading
+            }
+        };
+
+        fetchSitios();
+    }, []); // Vai rodar apenas uma vez ao carregar a página
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-200">
+                <div className="w-16 h-16 border-4 border-t-white border-blue-500 rounded-full animate-spin"></div>
+            </div>
         );
-    });
+    }
 
     return (
         <div className="">

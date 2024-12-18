@@ -30,6 +30,7 @@ export default function Page() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +57,7 @@ export default function Page() {
           setUser(parsedUser);
           const res = await getReservationsByUser(parsedUser.userId);
           setReservations(res);
+          setIsLoading(false);
         } catch (error) {
           console.error("Failed to parse user cookie:", error);
           setUser(null);
@@ -66,7 +68,7 @@ export default function Page() {
     fetchData();
   }, []);
 
-  if (!isAuthenticated || !user) {
+  if (!isAuthenticated || !user || isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="w-12 h-12 border-4 border-t-white border-gray-500 rounded-full animate-spin"></div>

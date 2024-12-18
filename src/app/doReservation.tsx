@@ -28,20 +28,22 @@ import { toast } from "react-toastify";
 
 type Props = {
   siteId: string;
-  pricePerDay: string
-};  
+  pricePerDay: string;
+};
 
 export type Response = {
-  success: boolean; 
+  success: boolean;
   message: string;
-  status: number
-}
+  status: number;
+};
 
 export function DoReservation({ siteId, pricePerDay }: Props) {
   const [date, setDate] = React.useState<Date>();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleReservation = async () => {
     if (date) {
+      setIsLoading(true);
       console.log("Data selecionada:", format(date, "yyyy-MM-dd"));
       const token = Cookies.get("authToken");
       const userCookie = Cookies.get("user");
@@ -60,18 +62,27 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
             dataReservation: date,
             dataCheckout: date,
             total: pricePerDay,
-          })
+          });
 
-          if(res.message === "Já existe uma reserva para este período.") {
-            toast("Já existe uma reserva para este período. Escolha outra data", { type: 'error' });
+          if (res.message === "Já existe uma reserva para este período.") {
+            setIsLoading(false);
+            toast(
+              "Já existe uma reserva para este período. Escolha outra data",
+              { type: "error" }
+            );
           }
 
-          if(res.status === 201) {
+          if (res.status === 201) {
             console.log("Reserva criada com sucesso!");
-            Cookies.set("reservation", 'success', { expires: 5 / 86400, secure: true });
+            Cookies.set("reservation", "success", {
+              expires: 5 / 86400,
+              secure: true,
+            });
+            setIsLoading(false);
             window.location.href = "/perfil";
           }
         } catch (error) {
+          setIsLoading(false);
           console.error("Failed to parse user cookie:", error);
         }
       }
@@ -124,8 +135,18 @@ export function DoReservation({ siteId, pricePerDay }: Props) {
             </form>
           </div>
           <DialogFooter>
-            <Button type="button" onClick={handleReservation}>
-              Fazer reserva
+            <Button
+              type="button"
+              onClick={handleReservation}
+              className="relative flex items-center justify-center px-4 py-2 text-white rounded-md focus:outline-none"
+            >
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-t-white border-black rounded-full animate-spin absolute left-2"></div>
+                </>
+              ) : (
+                "Reservar"
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
