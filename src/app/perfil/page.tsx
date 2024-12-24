@@ -16,7 +16,7 @@ type User = {
 };
 
 type Reservation = {
-  reservationId: string;
+  id: string;
   userId: string;
   siteId: string;
   dataReservation: string;
@@ -93,6 +93,7 @@ export default function Page() {
           reservations.map((reservation: Reservation, index) => (
             <CardMyReservation
               key={index}
+              reservationId={reservation.id}
               siteName={reservation.siteName}
               dataReservation={reservation.dataReservation}
               dataCheckout={reservation.dataCheckout}

@@ -4,15 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
-const VERSION = "0.7.8-beta";
+const VERSION = "0.8.0-beta";
 const VERSION_KEY = "app_version";
 const CHANGELOG = {
-  "0.7.8-beta": {
+  "0.8.0-beta": {
     name: "Quase lá!",
     changes: [
       "Sistema completo de reservas",
       "Autenticação de usuários",
       "Sistema de planos para proprietários",
+      "Função de ver detalhes da reserva",
+      "Botão para combinar preço com proprietário",
     ],
   },
 };

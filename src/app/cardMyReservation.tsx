@@ -2,8 +2,10 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
+  reservationId: string;
   siteName: string;
   dataReservation: string;
   dataCheckout: string;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 export function CardMyReservation({
+  reservationId,
   siteName,
   dataReservation,
   dataCheckout,
@@ -37,15 +40,19 @@ export function CardMyReservation({
       )}
 
       {status === "pending" && (
-        <button className="bg-[#EAB308] text-black flex gap-2 justify-center items-center py-2 px-6 rounded-lg mt-3">
-          Clique para pagar
-          <ArrowRight />
+        <button className="bg-[#EAB308] text-black py-2 px-6 rounded-lg mt-3">
+          <Link href={`/reserva/${reservationId}`} className="flex gap-2 justify-center items-center">
+            Clique para pagar
+            <ArrowRight />
+          </Link>
         </button>
       )}
 
       {status === "confirmed" && (
         <button className="bg-stone-900 py-2 px-6 rounded-lg font-bold text-white mt-3">
-        Ver Detalhes
+          <Link href={`/reserva/${reservationId}`} className="flex gap-2 justify-center items-center">
+            Ver Detalhes
+          </Link>
         </button>
       )}
     </div>

@@ -21,7 +21,6 @@ export default async function Page({ params }: any) {
 
   const site = await getSitio(id);
 
-  // Verifica se "site.images" é um array antes de tentar manipulá-lo
   if (site && Array.isArray(site.images)) {
     site.images = site.images.map(
       (imagePath: string) => baseURL + imagePath.replace(/\\/g, "/") // Substituir '\' por '/'
