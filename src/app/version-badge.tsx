@@ -4,10 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
-const VERSION = "0.7.7-beta";
+const VERSION = "0.7.8-beta";
 const VERSION_KEY = "app_version";
 const CHANGELOG = {
-  "0.7.7-beta": {
+  "0.7.8-beta": {
     name: "Quase lá!",
     changes: [
       "Sistema completo de reservas",
@@ -38,7 +38,7 @@ export function VersionBadge() {
       </Badge>
 
       <Dialog open={showChangelog} onOpenChange={setShowChangelog}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-[425px] max-w-[98%]">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold flex items-center gap-2">
               Novidades da versão {VERSION}
