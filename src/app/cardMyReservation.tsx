@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -26,12 +27,27 @@ export function CardMyReservation({
       </p>
 
       <p className="text-white font-bold">
-        Status: <span className="font-normal">{status}</span>
+        Status: <span className="font-normal">{status === "pending" && "Pendente"}{status === "confirmed" && "Confirmada"}</span>
       </p>
 
-      <button className="bg-stone-900 py-2 px-6 rounded-lg font-bold text-white mt-3">
+      {status === "pending" && (
+        <p className="text-white font-bold">
+          Total a pagar: <span className="font-normal">R$ {total}</span>
+        </p>
+      )}
+
+      {status === "pending" && (
+        <button className="bg-[#EAB308] text-black flex gap-2 justify-center items-center py-2 px-6 rounded-lg mt-3">
+          Clique para pagar
+          <ArrowRight />
+        </button>
+      )}
+
+      {status === "confirmed" && (
+        <button className="bg-stone-900 py-2 px-6 rounded-lg font-bold text-white mt-3">
         Ver Detalhes
-      </button>
+        </button>
+      )}
     </div>
   );
 }
