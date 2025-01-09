@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getSitios = async () => {
-    const sitios = await axios.get('https://site-service-jbcm.onrender.com/sites');
+    const sitios = await axios.get('https://site-service-production.up.railway.app/sites');
 
     const ping = await axios.get('https://reservation-service-ukoi.onrender.com/ping');
 

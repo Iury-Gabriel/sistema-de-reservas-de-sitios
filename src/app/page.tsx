@@ -10,7 +10,7 @@ export default function Page() {
     const [sitios, setSitios] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const baseURL = "https://site-service-jbcm.onrender.com/";
+    const baseURL = "https://site-service-production.up.railway.app/";
 
     useEffect(() => {
         const fetchSitios = async () => {
